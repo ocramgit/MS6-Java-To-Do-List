@@ -53,6 +53,7 @@ public class ToDoList {
             System.out.println("\u001b[38;5;15m9 - Delete all completed tasks\u001b[0m");
             System.out.println("\u001b[38;5;15m10 - Restore all deleted tasks\u001b[0m");
             System.out.println("\u001b[38;5;15m11 - Check tracker (history)\u001b[0m");
+            System.out.println("\u001b[38;5;15m12 - Add task note\u001b[0m");
             System.out.println("\u001b[38;5;15m0 - Exit ToDoList\u001b[0m\n");
             System.out.print("\u001b[38;5;15mChoose a option: \u001b[0m");
             userChoice = scan.nextInt();

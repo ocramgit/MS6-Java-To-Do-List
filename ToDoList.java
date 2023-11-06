@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class ToDoList {
 
     static File file = new File("tracker.txt");
+    static String[] notes = new String[99];
     static Tracker tracker = new Tracker(file);
 
     public static void main(String[] args) throws IOException {
@@ -105,6 +106,9 @@ public class ToDoList {
                 case 11:
                     tracker.readTracker();
                     break;
+                case 12:
+                    addNote(toDoList, notes);
+                    break;
                 case 0:
                     System.out.println("\n\u001b[38;5;9mClosing ToDoList program...\u001b[0m");
                     new FileWriter(file,false).close();
@@ -134,9 +138,17 @@ public class ToDoList {
                 if (toDoList[i] != null) {
                     if (toDoList[i].contains(" ✅")) {
                         countCompleted++;
-                        System.out.println("\u001b[38;5;7m" + i + ". \u001b[38;5;40m" + toDoList[i] + "\u001b[0m");
+                        System.out.print("\u001b[38;5;7m" + i + ". \u001b[38;5;40m" + toDoList[i] + "\u001b[0m");
+                        if(notes[i] != null) {
+                            System.out.print(" | Note: " + notes[i] + "\n");
+                        }
                     } else {
-                        System.out.println("\u001b[38;5;7m" + i + ". \u001b[38;5;1m" + toDoList[i] + "\u001b[0m");
+                        System.out.print("\u001b[38;5;7m" + i + ". \u001b[38;5;1m" + toDoList[i] + "\u001b[0m");
+                        if(notes[i] != null) {
+                            System.out.print(" | Note: " + notes[i] + "\n");
+                        } else {
+                            System.out.print("\n");
+                        }
                     }
                 }
             }
@@ -331,6 +343,7 @@ public class ToDoList {
             int userChoiceOfTaskToDelete = scan.nextInt();
 
             if (toDoList[userChoiceOfTaskToDelete] != null) {
+                notes[userChoiceOfTaskToDelete] = null;
                 System.out.println("\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoiceOfTaskToDelete] + "\u001b[38;5;10m' was successfully deleted!\u001b[0m");
                 removedTasks.add(toDoList[userChoiceOfTaskToDelete]);
                 toDoList[userChoiceOfTaskToDelete] = null;
@@ -341,6 +354,26 @@ public class ToDoList {
             System.out.println("\u001b[38;5;9mYou don't have tasks to delete!\u001b[0m");
         }
     }
+
+    public static void addNote(String [] toDoList, String[] notes) throws IOException {
+
+        Scanner sc = new Scanner(System.in);
+
+            showToDoList(toDoList);
+
+            System.out.print("\n\u001b[38;5;15mChoose a task to add a note: \u001b[0m");
+            int userChoice = sc.nextInt();
+
+            if(notes[userChoice] == null) {
+                System.out.print("\n\u001b[38;5;15mAdd an note to this message: \u001b[0m");
+                sc.nextLine();
+                notes[userChoice] = sc.nextLine();
+                tracker.writeOnTracker("A note " + "'"+ notes[userChoice] +"'" + " has been added to task " + "'" + toDoList[userChoice] + "' on " + LocalDate.now() + " at "+ LocalTime.now()+"\n");
+            } else {
+                System.out.println("\u001b[38;5;9mTask don't exist or already have a note.\u001b[0m");
+            }
+
+        }
 
     public static void restoreAllDeletedTasks(String[] toDoList, ArrayList<String> removedTasks) {
         boolean added = false;

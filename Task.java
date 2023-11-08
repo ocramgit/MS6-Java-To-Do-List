@@ -19,7 +19,7 @@ public class Task {
         this.message = message;
     }
 
-    public void showToDoList(String[] toDoList, String[] notes) {
+    public void showToDoList(String[] toDoList, String[] notes) throws Exception {
 
         int count = 0;
         int countCompleted = 0;
@@ -51,7 +51,7 @@ public class Task {
             }
             System.out.println("\u001b[38;5;8m------------------------\u001b[0m");
         } else {
-            message.getToDoListEmpty();
+            throw new Exception();
         }
 
         if (count > 0) {
@@ -92,39 +92,36 @@ public class Task {
         }
     }
 
-    public void markTaskAsCompleted(String[] toDoList, String[] notes) throws IOException {
+    public void markTaskAsCompleted(String[] toDoList, String[] notes) throws Exception {
+        if (toDoList.length == 0) throw new Exception();
         Scanner scan = new Scanner(System.in);
-
         showToDoList(toDoList, notes);
 
-        if (toDoList.length != 0) {
-            message.getTaskToCompleteMessage();
-            int userChoice = scan.nextInt();
+        message.getTaskToCompleteMessage();
+        int userChoice = scan.nextInt();
 
-            if (userChoice >= 0 && userChoice < toDoList.length && toDoList[userChoice] != null) {
-                if (toDoList[userChoice].contains(" ✅")) {
-                    message.getTaskAlreadyCompletedMessage();
-                } else {
-                    toDoList[userChoice] = toDoList[userChoice].concat(" ✅\n");
-
-                    String completedTask = toDoList[userChoice];
-                    for (int i = userChoice; i > 0; i--) {
-                        toDoList[i] = toDoList[i - 1];
-                    }
-                    tracker.writeOnTracker("Task '" + toDoList[userChoice] + "' has been marked as completed on " + LocalDate.now() + " at " + LocalTime.now() + "\n");
-                    toDoList[0] = completedTask;
-
-                    message.getTaskCompletedMessage();
-                }
+        if (userChoice >= 0 && userChoice < toDoList.length && toDoList[userChoice] != null) {
+            if (toDoList[userChoice].contains(" ✅")) {
+                message.getTaskAlreadyCompletedMessage();
             } else {
-                message.getInvalidOption();
+                toDoList[userChoice] = toDoList[userChoice].concat(" ✅\n");
+
+                String completedTask = toDoList[userChoice];
+                for (int i = userChoice; i > 0; i--) {
+                    toDoList[i] = toDoList[i - 1];
+                }
+                tracker.writeOnTracker("Task '" + toDoList[userChoice] + "' has been marked as completed on " + LocalDate.now() + " at " + LocalTime.now() + "\n");
+                toDoList[0] = completedTask;
+
+                message.getTaskCompletedMessage();
             }
         } else {
-           message.getDontHaveTasksMessage();
+            message.getInvalidOption();
         }
+
     }
 
-    public void removeTaskAsCompleted(String[] toDoList) {
+    public void removeTaskAsCompleted(String[] toDoList) throws Exception {
         Scanner scan = new Scanner(System.in);
 
         int existsCompletedTasks = 0;
@@ -135,61 +132,57 @@ public class Task {
             }
         }
 
-        if (existsCompletedTasks > 0) {
+        if (existsCompletedTasks < 1) throw new Exception();
 
-            message.getChooseTaskToRemoveAsCompletedMessage();
-            int userChoiceOfTaskToRemoveAsCompleted = scan.nextInt();
+        message.getChooseTaskToRemoveAsCompletedMessage();
+        int userChoiceOfTaskToRemoveAsCompleted = scan.nextInt();
 
-            if (toDoList[userChoiceOfTaskToRemoveAsCompleted] != null) {
-                toDoList[userChoiceOfTaskToRemoveAsCompleted] = toDoList[userChoiceOfTaskToRemoveAsCompleted].replace(" ✅", "");
-            } else {
-                message.getInvalidOption();
-            }
+        if (toDoList[userChoiceOfTaskToRemoveAsCompleted] != null) {
+            toDoList[userChoiceOfTaskToRemoveAsCompleted] = toDoList[userChoiceOfTaskToRemoveAsCompleted].replace(" ✅", "");
         } else {
-            message.getDontHaveAnyCompletedTask();
+            message.getInvalidOption();
         }
     }
 
-    public void editTask(String[] toDoList, String[] notes) throws IOException {
+    public void editTask(String[] toDoList, String[] notes) throws Exception {
         Scanner scan = new Scanner(System.in);
 
         showToDoList(toDoList, notes);
-        if (toDoList.length != 0) {
-            message.getTaskToEditMessage();
-            int userChoice = scan.nextInt();
 
-            scan.nextLine();
+        if (toDoList.length == 0) throw new Exception();
 
-            if (toDoList[userChoice] != null) {
+        message.getTaskToEditMessage();
+        int userChoice = scan.nextInt();
 
-                if (toDoList[userChoice].contains(" ✅")) {
-                    toDoList[userChoice] = toDoList[userChoice].replace(" ✅", "");
-                    System.out.println("\n\u001b[38;5;15mOld: " + toDoList[userChoice] + "\u001b[0m");
-                    message.getNewMessage();
-                    String userEditTask = scan.nextLine() + " ✅\u001b[0m | Modified on "+LocalDate.now();
+        scan.nextLine();
 
-                    tracker.writeOnTracker("The completed task " + "'"+ toDoList[userChoice] +"'" + " has been edited to " + "'" + userEditTask + "' on" + LocalDate.now() + " at "+ LocalTime.now()+"\n");
-                    System.out.println("\n\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoice] + "\u001b[38;5;10m' was changed to '\u001b[38;5;15m" + userEditTask + "\u001b[38;5;10m'!");
+        if (toDoList[userChoice] != null) {
 
-                    toDoList[userChoice] = userEditTask;
-                } else {
-                    System.out.println("\n\u001b[38;5;15mOld: " + toDoList[userChoice] + "\u001b[0m");
-                    message.getNewMessage();
-                    String userEditTask = scan.nextLine() + "\u001b[0m | Modified on "+ LocalDate.now();
-                    tracker.writeOnTracker("The uncompleted task " + "'"+ toDoList[userChoice] +"'" + " has been edited to " + "'" + userEditTask + "' on" + LocalDate.now() + " at "+ LocalTime.now()+"\n");
+            if (toDoList[userChoice].contains(" ✅")) {
+                toDoList[userChoice] = toDoList[userChoice].replace(" ✅", "");
+                System.out.println("\n\u001b[38;5;15mOld: " + toDoList[userChoice] + "\u001b[0m");
+                message.getNewMessage();
+                String userEditTask = scan.nextLine() + " ✅\u001b[0m | Modified on " + LocalDate.now();
 
-                    System.out.println("\n\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoice] + "\u001b[38;5;10m' was changed to '\u001b[38;5;15m" + userEditTask + "\u001b[38;5;10m'!");
-                    toDoList[userChoice] = userEditTask;
-                }
+                tracker.writeOnTracker("The completed task " + "'" + toDoList[userChoice] + "'" + " has been edited to " + "'" + userEditTask + "' on" + LocalDate.now() + " at " + LocalTime.now() + "\n");
+                System.out.println("\n\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoice] + "\u001b[38;5;10m' was changed to '\u001b[38;5;15m" + userEditTask + "\u001b[38;5;10m'!");
+
+                toDoList[userChoice] = userEditTask;
             } else {
-                message.getInvalidOption();
+                System.out.println("\n\u001b[38;5;15mOld: " + toDoList[userChoice] + "\u001b[0m");
+                message.getNewMessage();
+                String userEditTask = scan.nextLine() + "\u001b[0m | Modified on " + LocalDate.now();
+                tracker.writeOnTracker("The uncompleted task " + "'" + toDoList[userChoice] + "'" + " has been edited to " + "'" + userEditTask + "' on" + LocalDate.now() + " at " + LocalTime.now() + "\n");
+
+                System.out.println("\n\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoice] + "\u001b[38;5;10m' was changed to '\u001b[38;5;15m" + userEditTask + "\u001b[38;5;10m'!");
+                toDoList[userChoice] = userEditTask;
             }
         } else {
-            message.getDontHaveAnyTaskToEditMessage();
+            message.getInvalidOption();
         }
     }
 
-    public void deleteTask(String[] toDoList, ArrayList<String> removedTasks, String[] notes) {
+    public void deleteTask(String[] toDoList, ArrayList<String> removedTasks, String[] notes) throws Exception {
         Scanner scan = new Scanner(System.in);
 
         int existedTasks = 0;
@@ -200,24 +193,21 @@ public class Task {
             }
         }
 
-        if (existedTasks > 0) {
-            message.getMessageToDeleteMessage();
-            int userChoiceOfTaskToDelete = scan.nextInt();
+        if (existedTasks < 1) throw new Exception();
+        message.getMessageToDeleteMessage();
+        int userChoiceOfTaskToDelete = scan.nextInt();
 
-            if (toDoList[userChoiceOfTaskToDelete] != null) {
-                notes[userChoiceOfTaskToDelete] = null;
-                System.out.println("\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoiceOfTaskToDelete] + "\u001b[38;5;10m' was successfully deleted!\u001b[0m");
-                removedTasks.add(toDoList[userChoiceOfTaskToDelete]);
-                toDoList[userChoiceOfTaskToDelete] = null;
-            } else {
-                message.getInvalidOption();
-            }
+        if (toDoList[userChoiceOfTaskToDelete] == null) {
+            notes[userChoiceOfTaskToDelete] = null;
+            System.out.println("\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoiceOfTaskToDelete] + "\u001b[38;5;10m' was successfully deleted!\u001b[0m");
+            removedTasks.add(toDoList[userChoiceOfTaskToDelete]);
+            toDoList[userChoiceOfTaskToDelete] = null;
         } else {
-            message.getDontHaveAnyTaskToDeleteMessage();
+            message.getInvalidOption();
         }
     }
 
-    public void addNote(String [] toDoList, String[] notes) throws IOException {
+    public void addNote(String[] toDoList, String[] notes) throws Exception {
 
         Scanner sc = new Scanner(System.in);
 
@@ -226,18 +216,18 @@ public class Task {
         message.getAddNoteTaskMessage();
         int userChoice = sc.nextInt();
 
-        if(notes[userChoice] == null) {
-            message.getAddNoteMessage();
-            sc.nextLine();
-            notes[userChoice] = sc.nextLine();
-            tracker.writeOnTracker("A note " + "'"+ notes[userChoice] +"'" + " has been added to task " + "'" + toDoList[userChoice] + "' on " + LocalDate.now() + " at "+ LocalTime.now()+"\n");
-        } else {
-            System.out.println("\u001b[38;5;9mTask don't exist or already have a note.\u001b[0m");
-        }
+        if (notes[userChoice] == null) throw new Exception();
+        message.getAddNoteMessage();
+        sc.nextLine();
+        notes[userChoice] = sc.nextLine();
+        tracker.writeOnTracker("A note " + "'" + notes[userChoice] + "'" + " has been added to task " + "'" + toDoList[userChoice] + "' on " + LocalDate.now() + " at " + LocalTime.now() + "\n");
     }
 
-    public void restoreAllDeletedTasks(String[] toDoList, ArrayList<String> removedTasks) {
+    public void restoreAllDeletedTasks(String[] toDoList, ArrayList<String> removedTasks) throws Exception {
         boolean added = false;
+
+        if(removedTasks.isEmpty()) throw new Exception();
+
         for (int j = 0; j < removedTasks.size(); j++) {
             String el = removedTasks.get(j);
             for (int i = 0; i < toDoList.length; i++) {
@@ -258,14 +248,9 @@ public class Task {
     }
 
 
-    public void organizeAlphabetically(String[] toDoList) {
-        int count = 0;
-        for (int i = 0; i < toDoList.length; i++) {
-            if (toDoList[i] != null) {
-                count++;
-            }
-        }
-        Arrays.sort(toDoList, 0, count);
+    public void organizeAlphabetically(String[] toDoList) throws Exception {
+        if(toDoList.length == 0) throw new Exception();
+        Arrays.sort(toDoList, 0, toDoList.length);
     }
 
     public boolean upgradeToDoListPlan(String[] toDoList, boolean premium) {
@@ -288,7 +273,7 @@ public class Task {
 
             return premium;
         } else {
-            System.out.println("\n\u001b[38;5;11mYour plan is already setted to Premium! You don't need to buy it again.\u001b[0m");
+            message.getAlreadyHavePremiumMessage();
         }
         return premium;
     }
@@ -302,13 +287,13 @@ public class Task {
         boolean deletedOne = false;
         for (int i = 0; i < toDoList.length; i++) {
             if (toDoList[i] != null && toDoList[i].contains(" ✅")) {
-                tracker.writeOnTracker("Completed task: " + "'"+ toDoList[i] +"'" + " has been deleted on " + LocalDate.now() + " at "+ LocalTime.now()+"\n");
+                tracker.writeOnTracker("Completed task: " + "'" + toDoList[i] + "'" + " has been deleted on " + LocalDate.now() + " at " + LocalTime.now() + "\n");
                 toDoList[i] = null;
                 deletedOne = true;
             }
         }
 
-        if(!deletedOne) {
+        if (!deletedOne) {
             System.out.println("\n\u001b[38;5;9mYou don't have completed task!\u001b[0m");
         } else {
             System.out.println("\n\u001b[38;5;10mTasks deleted.\u001b[0m");

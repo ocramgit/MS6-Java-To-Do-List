@@ -67,3 +67,7 @@ The uncompleted task 'asdasasdaa[0m | Created on 2023-11-07' has been edited to
 ' on2023-11-07 at 08:40:52.245533
 Task: 'o[0m | Created on 2023-11-07' has been created on 2023-11-07 at 08:40:56.864907
 Task: 'OK TESTE[0m | Created on 2023-11-07' has been created on 2023-11-07 at 10:37:47.168626
+A note '1' has been added to task 'null' on 2023-11-07 at 12:23:55.042560
+Task: 'asdadas[0m | Created on 2023-11-08' has been created on 2023-11-08 at 10:18:56.404677
+Task 'asdadas[0m | Created on 2023-11-08 ✅
+' has been marked as completed on 2023-11-08 at 10:19:09.956782

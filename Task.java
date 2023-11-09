@@ -59,7 +59,7 @@ public class Task {
             DecimalFormat decimal = new DecimalFormat("0.00");
 
             int countUncompleted = count - countCompleted;
-            double percentage = (double) countCompleted / (countCompleted + count) * 100;
+            double percentage = ((double) countCompleted / count) * 100;
             String decimalPercentage = decimal.format(percentage);
 
             message.getUncompletedAndCompletedMessage(countUncompleted, countCompleted, decimalPercentage);

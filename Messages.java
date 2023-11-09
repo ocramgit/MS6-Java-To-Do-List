@@ -125,4 +125,8 @@ public class Messages {
     public void getRemoveTaskAsCompleted() {
         System.out.println("\n\u001b[38;5;10mTask checkmark has been removed successfully!\u001b[0m");
     }
+
+    public void organized() {
+        System.out.println("\n\u001b[38;5;10mTasks organized successfully!\u001b[0m");
+    }
 }

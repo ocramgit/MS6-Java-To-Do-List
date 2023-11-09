@@ -71,3 +71,91 @@ A note '1' has been added to task 'null' on 2023-11-07 at 12:23:55.042560
 Task: 'asdadas[0m | Created on 2023-11-08' has been created on 2023-11-08 at 10:18:56.404677
 Task 'asdadas[0m | Created on 2023-11-08 ✅
 ' has been marked as completed on 2023-11-08 at 10:19:09.956782
+Task: 'asd[0m | Created on 2023-11-08' has been created on 2023-11-08 at 11:46:26.609026
+Task: 'asd[0m | Created on 2023-11-08' has been created on 2023-11-08 at 11:47:45.309050
+Task: 'asd[0m | Created on 2023-11-08' has been created on 2023-11-08 at 11:48:22.764530
+Task: 'asd[0m | Created on 2023-11-08' has been created on 2023-11-08 at 11:49:54.173085
+Task: 'asdadsa[0m | Created on 2023-11-08' has been created on 2023-11-08 at 11:52:16.546979
+Task: 'adasda[0m | Created on 2023-11-08' has been created on 2023-11-08 at 14:40:27.905536
+Task: 'sadadsadasda[0m | Created on 2023-11-08' has been created on 2023-11-08 at 14:46:29.989459
+Task: 'asdasda[0m | Created on 2023-11-08' has been created on 2023-11-08 at 14:47:25.649211
+Task: 'adasdasda[0m | Created on 2023-11-08' has been created on 2023-11-08 at 14:55:02.222820
+Task 'adasdasda[0m | Created on 2023-11-08 ✅
+' has been marked as completed on 2023-11-08 at 14:55:03.945829
+Task: 'dsadsda[0m | Created on 2023-11-08' has been created on 2023-11-08 at 14:55:33.298104
+Task: 'asdasdsada[0m | Created on 2023-11-08' has been created on 2023-11-08 at 14:57:33.774655
+Task: 'asdasdda[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:06:03.561104
+Task: 'asdaf[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:06:05.285859
+Task: 'regregrg[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:06:06.582394
+Task 'asdasdda[0m | Created on 2023-11-08' has been marked as completed on 2023-11-08 at 15:06:09.811397
+Task: 'ffgge[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:06:13.975243
+Task 'regregrg[0m | Created on 2023-11-08' has been marked as completed on 2023-11-08 at 15:06:16.606330
+Task: 'asdasdasdadada[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:07:25.105789
+Task: 'asdafdsfs[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:07:29.194917
+Task: 'rthtrhrthr[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:07:30.448254
+Task 'asdafdsfs[0m | Created on 2023-11-08' has been marked as completed on 2023-11-08 at 15:07:40.935008
+Task: 'adasdas[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:08:02.446947
+Task: 'grgtgr[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:08:03.652496
+Task 'adasdas[0m | Created on 2023-11-08' has been marked as completed on 2023-11-08 at 15:08:05.647043
+Completed task: 'grgtgr[0m | Created on 2023-11-08 ✅
+' has been deleted on 2023-11-08 at 15:09:20.784908
+Task: 'asdsadsadadasada[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:09:37.537326
+Task: 'asdadaddada[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:09:40.242622
+Task 'asdsadsadadasada[0m | Created on 2023-11-08' has been marked as completed on 2023-11-08 at 15:09:41.845582
+Task: 'fggr[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:09:43.798015
+Task: 'thtth[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:09:45.055021
+Task: 'errer[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:09:46.243100
+Task: 'aaaa[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:11:06.425958
+Task: 'bbbbb[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:11:07.765529
+Task: 'bbbb[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:11:09.517972
+Task: 'cccc[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:11:11.295997
+Task: 'hyhyyhy[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:11:13.436609
+Task: 'ikikik[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:11:14.853937
+Task: 'erewrwer[0m | Created on 2023-11-08' has been created on 2023-11-08 at 15:11:16.010212
+Task 'aaaa[0m | Created on 2023-11-08' has been marked as completed on 2023-11-08 at 15:11:17.775582
+Completed task: 'bbbbb[0m | Created on 2023-11-08 ✅
+' has been deleted on 2023-11-08 at 15:11:42.782458
+Task: 'asdasdasdasd[0m | Created on 2023-11-09' has been created on 2023-11-09 at 07:50:45.229933
+Task: 'asdasdsad[0m | Created on 2023-11-09' has been created on 2023-11-09 at 07:53:27.028932
+Task: 'asdaada[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:01:30.292770
+Task: 'asdadasdad[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:17:34.597084
+Task: 'asdasdas[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:20:09.737157
+Task: 'asdasdasdada[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:21:31.893761
+Task: 'asdasdsad[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:21:58.143489
+Task: 'asdadsaadas[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:23:26.433888
+Task: 'asdasdsaa[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:26:42.322154
+Task: 'asdasddsa[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:27:42.191677
+Task 'asdasddsa[0m | Created on 2023-11-09 ✅
+' has been marked as completed on 2023-11-09 at 08:27:54.959236
+Task: 'asdada[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:28:39.103319
+Task 'asdada[0m | Created on 2023-11-09 ✅
+' has been marked as completed on 2023-11-09 at 08:28:49.655347
+Task: 'asdasda[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:32:29.014466
+Task 'asdasda[0m | Created on 2023-11-09 ✅
+' has been marked as completed on 2023-11-09 at 08:32:37.590255
+Task: 'asdasdasd[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:33:08.571580
+Task 'asdasdasd[0m | Created on 2023-11-09 ✅
+' has been marked as completed on 2023-11-09 at 08:33:12.162453
+Task: 'asdasdasd[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:36:02.014228
+Task 'asdasdasd[0m | Created on 2023-11-09 ✅
+' has been marked as completed on 2023-11-09 at 08:36:05.585842
+Task: 'asdasidjaisdasd[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:38:11.183010
+Task 'asdasidjaisdasd[0m | Created on 2023-11-09 ✅
+' has been marked as completed on 2023-11-09 at 08:38:19.634783
+Task: '5[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:41:07.647181
+Task: 'asdasdsadasdda[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:41:38.100696
+Task: 'asdasdasdads[0m | Created on 2023-11-09' has been created on 2023-11-09 at 08:42:41.220808
+Task: 'asdadda[0m | Created on 2023-11-09' has been created on 2023-11-09 at 09:31:25.177580
+The uncompleted task 'asdadda[0m | Created on 2023-11-09' has been edited to '[0m | Modified on 2023-11-09' on2023-11-09 at 09:31:33.938603
+Task: 'asdasdsadada[0m | Created on 2023-11-09' has been created on 2023-11-09 at 09:32:01.777992
+The uncompleted task 'asdasdsadada[0m | Created on 2023-11-09' has been edited to '[0m | Modified on 2023-11-09' on2023-11-09 at 09:32:04.748765
+Task: 'asdasdsadasda[0m | Created on 2023-11-09' has been created on 2023-11-09 at 09:33:12.500413
+Task: 'adasdadsada[0m | Created on 2023-11-09' has been created on 2023-11-09 at 09:33:37.970181
+The uncompleted task 'adasdadsada[0m | Created on 2023-11-09' has been edited to '[0m | Modified on 2023-11-09' on2023-11-09 at 09:33:43.483728
+Task: 'asdadsa[0m | Created on 2023-11-09' has been created on 2023-11-09 at 09:39:28.928927
+The uncompleted task 'asdadsa[0m | Created on 2023-11-09' has been edited to '[0m | Modified on 2023-11-09' on2023-11-09 at 09:41:15.163027
+Task: 'asdasda[0m | Created on 2023-11-09' has been created on 2023-11-09 at 09:42:51.132687
+The uncompleted task 'asdasda[0m | Created on 2023-11-09' has been edited to '[0m | Modified on 2023-11-09' on2023-11-09 at 09:47:00.117464
+Task: 'asdasdasdas[0m | Created on 2023-11-09' has been created on 2023-11-09 at 09:47:42.225745
+The uncompleted task 'asdasdasdas[0m | Created on 2023-11-09' has been edited to 'ok[0m | Modified on 2023-11-09' on2023-11-09 at 09:47:48.758927
+Task: 'asdasdda[0m | Created on 2023-11-09' has been created on 2023-11-09 at 12:06:54.304850

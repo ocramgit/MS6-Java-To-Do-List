@@ -19,7 +19,7 @@ public class Task {
         this.message = message;
     }
 
-    public void showToDoList(String[] toDoList, String[] notes) throws Exception {
+    public void showToDoList(String[] toDoList, String[] notes) throws CustomError {
 
         int count = 0;
         int countCompleted = 0;
@@ -51,7 +51,7 @@ public class Task {
             }
             System.out.println("\u001b[38;5;8m------------------------\u001b[0m");
         } else {
-            throw new Exception();
+            throw new CustomError("Empty List");
         }
 
         if (count > 0) {
@@ -92,141 +92,182 @@ public class Task {
         }
     }
 
-    public void markTaskAsCompleted(String[] toDoList, String[] notes) throws Exception {
-        if (toDoList.length == 0) throw new Exception();
+    public void markTaskAsCompleted(String[] toDoList, String[] notes) throws CustomError, IOException {
+        if (toDoList.length == 0) throw new CustomError("Empty List.");
         Scanner scan = new Scanner(System.in);
         showToDoList(toDoList, notes);
 
         message.getTaskToCompleteMessage();
-        int userChoice = scan.nextInt();
+        int userChoice = -1;
 
-        if (userChoice >= 0 && userChoice < toDoList.length && toDoList[userChoice] != null) {
-            if (toDoList[userChoice].contains(" ✅")) {
-                message.getTaskAlreadyCompletedMessage();
-            } else {
-                toDoList[userChoice] = toDoList[userChoice].concat(" ✅\n");
+        boolean validInput = false;
 
-                String completedTask = toDoList[userChoice];
-                for (int i = userChoice; i > 0; i--) {
-                    toDoList[i] = toDoList[i - 1];
+        while (!validInput) {
+            if (scan.hasNextInt()) {
+                userChoice = scan.nextInt();
+                if (userChoice >= 0 && userChoice < toDoList.length && toDoList[userChoice] != null) {
+                    validInput = true;
+                } else {
+                    System.out.print("Invalid option. Choose a valid task number: ");
                 }
-                tracker.writeOnTracker("Task '" + toDoList[userChoice] + "' has been marked as completed on " + LocalDate.now() + " at " + LocalTime.now() + "\n");
-                toDoList[0] = completedTask;
-
-                message.getTaskCompletedMessage();
-            }
-        } else {
-            message.getInvalidOption();
-        }
-
-    }
-
-    public void removeTaskAsCompleted(String[] toDoList) throws Exception {
-        Scanner scan = new Scanner(System.in);
-
-        int existsCompletedTasks = 0;
-        for (int i = 0; i < toDoList.length; i++) {
-            if (toDoList[i] != null && toDoList[i].contains(" ✅")) {
-                System.out.println(i + " - " + toDoList[i]);
-                existsCompletedTasks++;
+            } else {
+                scan.next();
+                System.out.print("Invalid option. Choose a valid task number: ");
             }
         }
 
-        if (existsCompletedTasks < 1) throw new Exception();
-
-        message.getChooseTaskToRemoveAsCompletedMessage();
-        int userChoiceOfTaskToRemoveAsCompleted = scan.nextInt();
-
-        if (toDoList[userChoiceOfTaskToRemoveAsCompleted] != null) {
-            toDoList[userChoiceOfTaskToRemoveAsCompleted] = toDoList[userChoiceOfTaskToRemoveAsCompleted].replace(" ✅", "");
+        if (toDoList[userChoice].contains(" ✅")) {
+            message.getTaskAlreadyCompletedMessage();
         } else {
-            message.getInvalidOption();
+            toDoList[userChoice] = toDoList[userChoice].concat(" ✅\n");
+
+            String completedTask = toDoList[userChoice];
+            for (int i = userChoice; i > 0; i--) {
+                toDoList[i] = toDoList[i - 1];
+            }
+            tracker.writeOnTracker("Task '" + toDoList[userChoice] + "' has been marked as completed on " + LocalDate.now() + " at " + LocalTime.now() + "\n");
+            toDoList[0] = completedTask;
+
+            message.getTaskCompletedMessage();
         }
     }
 
-    public void editTask(String[] toDoList, String[] notes) throws Exception {
+
+    public void removeTaskAsCompleted(String[] toDoList, String[] notes) throws CustomError {
         Scanner scan = new Scanner(System.in);
 
         showToDoList(toDoList, notes);
 
-        if (toDoList.length == 0) throw new Exception();
+        if (toDoList.length < 1) throw new CustomError("Empty List");
 
-        message.getTaskToEditMessage();
-        int userChoice = scan.nextInt();
+        message.getChooseTaskToRemoveAsCompletedMessage();
 
-        scan.nextLine();
+        boolean validInput = false;
+        int userChoiceOfTaskToRemoveAsCompleted = -1;
 
-        if (toDoList[userChoice] != null) {
-
-            if (toDoList[userChoice].contains(" ✅")) {
-                toDoList[userChoice] = toDoList[userChoice].replace(" ✅", "");
-                System.out.println("\n\u001b[38;5;15mOld: " + toDoList[userChoice] + "\u001b[0m");
-                message.getNewMessage();
-                String userEditTask = scan.nextLine() + " ✅\u001b[0m | Modified on " + LocalDate.now();
-
-                tracker.writeOnTracker("The completed task " + "'" + toDoList[userChoice] + "'" + " has been edited to " + "'" + userEditTask + "' on" + LocalDate.now() + " at " + LocalTime.now() + "\n");
-                System.out.println("\n\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoice] + "\u001b[38;5;10m' was changed to '\u001b[38;5;15m" + userEditTask + "\u001b[38;5;10m'!");
-
-                toDoList[userChoice] = userEditTask;
+        while (!validInput) {
+            if (scan.hasNextInt()) {
+                userChoiceOfTaskToRemoveAsCompleted = scan.nextInt();
+                if (toDoList[userChoiceOfTaskToRemoveAsCompleted] != null) {
+                    validInput = true;
+                    message.getRemoveTaskAsCompleted();
+                    toDoList[userChoiceOfTaskToRemoveAsCompleted] = toDoList[userChoiceOfTaskToRemoveAsCompleted].replace(" ✅", "");
+                } else {
+                    message.getInvalidOption();
+                }
             } else {
-                System.out.println("\n\u001b[38;5;15mOld: " + toDoList[userChoice] + "\u001b[0m");
-                message.getNewMessage();
-                String userEditTask = scan.nextLine() + "\u001b[0m | Modified on " + LocalDate.now();
-                tracker.writeOnTracker("The uncompleted task " + "'" + toDoList[userChoice] + "'" + " has been edited to " + "'" + userEditTask + "' on" + LocalDate.now() + " at " + LocalTime.now() + "\n");
-
-                System.out.println("\n\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoice] + "\u001b[38;5;10m' was changed to '\u001b[38;5;15m" + userEditTask + "\u001b[38;5;10m'!");
-                toDoList[userChoice] = userEditTask;
+                scan.next();
+                System.out.print("Invalid option. Choose a valid task number: ");
             }
-        } else {
-            message.getInvalidOption();
         }
     }
 
-    public void deleteTask(String[] toDoList, ArrayList<String> removedTasks, String[] notes) throws Exception {
+    public void editTask(String[] toDoList, String[] notes) throws CustomError, IOException {
         Scanner scan = new Scanner(System.in);
 
-        int existedTasks = 0;
-        for (int i = 0; i < toDoList.length; i++) {
-            if (toDoList[i] != null) {
-                System.out.println(i + " - " + toDoList[i]);
-                existedTasks++;
+        showToDoList(toDoList, notes);
+
+        if (toDoList.length < 1) throw new CustomError("Empty List");
+
+        message.getTaskToEditMessage();
+        int userChoice;
+
+        boolean validInput = false;
+
+        while (!validInput) {
+            if (scan.hasNextInt()) {
+                userChoice = scan.nextInt();
+                if (toDoList[userChoice] != null) {
+                    validInput = true;
+                    if (toDoList[userChoice].contains(" ✅")) {
+                        toDoList[userChoice] = toDoList[userChoice].replace(" ✅", "");
+                        System.out.println("\n\u001b[38;5;15mOld: " + toDoList[userChoice] + "\u001b[0m");
+                        message.getNewMessage();
+                        String userEditTask = scan.next() + " ✅\u001b[0m | Modified on " + LocalDate.now();
+
+                        tracker.writeOnTracker("The completed task " + "'" + toDoList[userChoice] + "'" + " has been edited to " + "'" + userEditTask + "' on" + LocalDate.now() + " at " + LocalTime.now() + "\n");
+                        System.out.println("\n\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoice] + "\u001b[38;5;10m' was changed to '\u001b[38;5;15m" + userEditTask + "\u001b[38;5;10m'!");
+
+                        toDoList[userChoice] = userEditTask;
+                    } else {
+                        System.out.println("\n\u001b[38;5;15mOld: " + toDoList[userChoice] + "\u001b[0m");
+                        message.getNewMessage();
+                        String userEditTask = scan.next() + "\u001b[0m | Modified on " + LocalDate.now();
+                        tracker.writeOnTracker("The uncompleted task " + "'" + toDoList[userChoice] + "'" + " has been edited to " + "'" + userEditTask + "' on" + LocalDate.now() + " at " + LocalTime.now() + "\n");
+
+                        System.out.println("\n\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoice] + "\u001b[38;5;10m' was changed to '\u001b[38;5;15m" + userEditTask + "\u001b[38;5;10m'!");
+                        toDoList[userChoice] = userEditTask;
+                    }
+                }
+            } else {
+                scan.next();
+                System.out.print("Invalid option. Choose a valid task number: ");
             }
-        }
-
-        if (existedTasks < 1) throw new Exception();
-        message.getMessageToDeleteMessage();
-        int userChoiceOfTaskToDelete = scan.nextInt();
-
-        if (toDoList[userChoiceOfTaskToDelete] == null) {
-            notes[userChoiceOfTaskToDelete] = null;
-            System.out.println("\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoiceOfTaskToDelete] + "\u001b[38;5;10m' was successfully deleted!\u001b[0m");
-            removedTasks.add(toDoList[userChoiceOfTaskToDelete]);
-            toDoList[userChoiceOfTaskToDelete] = null;
-        } else {
-            message.getInvalidOption();
         }
     }
 
-    public void addNote(String[] toDoList, String[] notes) throws Exception {
+    public void deleteTask(String[] toDoList, ArrayList<String> removedTasks, String[] notes) throws CustomError {
+        Scanner scan = new Scanner(System.in);
+
+        showToDoList(toDoList, notes);
+
+        if (toDoList.length < 1) throw new CustomError("Empty List");
+
+        message.getMessageToDeleteMessage();
+
+        int userChoiceOfTaskToDelete;
+
+        boolean validInput = false;
+
+        while (!validInput) {
+            if (scan.hasNextInt()) {
+                userChoiceOfTaskToDelete = scan.nextInt();
+                if (toDoList[userChoiceOfTaskToDelete] != null) {
+                    validInput = true;
+                }
+                notes[userChoiceOfTaskToDelete] = null;
+                System.out.println("\u001b[38;5;10mThe task '\u001b[38;5;15m" + toDoList[userChoiceOfTaskToDelete] + "\u001b[38;5;10m' was successfully deleted!\u001b[0m");
+                removedTasks.add(toDoList[userChoiceOfTaskToDelete]);
+                toDoList[userChoiceOfTaskToDelete] = null;
+            } else {
+                scan.next();
+                System.out.print("Invalid option. Choose a valid task number: ");
+            }
+        }
+    }
+
+    public void addNote(String[] toDoList, String[] notes) throws CustomError, IOException {
 
         Scanner sc = new Scanner(System.in);
 
         showToDoList(toDoList, notes);
 
         message.getAddNoteTaskMessage();
-        int userChoice = sc.nextInt();
+        int userChoice;
 
-        if (notes[userChoice] == null) throw new Exception();
-        message.getAddNoteMessage();
-        sc.nextLine();
-        notes[userChoice] = sc.nextLine();
-        tracker.writeOnTracker("A note " + "'" + notes[userChoice] + "'" + " has been added to task " + "'" + toDoList[userChoice] + "' on " + LocalDate.now() + " at " + LocalTime.now() + "\n");
+        boolean validInput = false;
+
+        while (!validInput) {
+            if (scan.hasNextInt()) {
+                userChoice = scan.nextInt();
+                if (notes[userChoice] == null) {
+                    validInput = true;
+                }
+                message.getAddNoteMessage();
+                sc.nextLine();
+                notes[userChoice] = sc.nextLine();
+                tracker.writeOnTracker("A note " + "'" + notes[userChoice] + "'" + " has been added to task " + "'" + toDoList[userChoice] + "' on " + LocalDate.now() + " at " + LocalTime.now() + "\n");
+            } else {
+                scan.next();
+                System.out.print("Invalid option. Choose a valid task number: ");
+            }
+        }
     }
 
-    public void restoreAllDeletedTasks(String[] toDoList, ArrayList<String> removedTasks) throws Exception {
+    public void restoreAllDeletedTasks(String[] toDoList, ArrayList<String> removedTasks) throws CustomError {
         boolean added = false;
 
-        if(removedTasks.isEmpty()) throw new Exception();
+        if (removedTasks.isEmpty()) throw new CustomError("Empty List");
 
         for (int j = 0; j < removedTasks.size(); j++) {
             String el = removedTasks.get(j);
@@ -248,8 +289,8 @@ public class Task {
     }
 
 
-    public void organizeAlphabetically(String[] toDoList) throws Exception {
-        if(toDoList.length == 0) throw new Exception();
+    public void organizeAlphabetically(String[] toDoList) throws CustomError {
+        if (toDoList.length == 0) throw new CustomError("Empty List");
         Arrays.sort(toDoList, 0, toDoList.length);
     }
 

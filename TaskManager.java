@@ -23,7 +23,7 @@ public class TaskManager {
         file = new File("tracker.txt");
     }
 
-    public void menu() throws IOException {
+    public void menu() throws Exception {
 
         if (!premiumPlan) {
             message.getFreeUpgradeMessage();
@@ -50,16 +50,16 @@ public class TaskManager {
             try {
                 switch (scan.next()) {
                     case "1":
-                        task.showToDoList(toDoList, notes);
+                            task.showToDoList(toDoList, notes);
                         break;
                     case "2":
                         task.createTask(toDoList);
                         break;
                     case "3":
-                        task.markTaskAsCompleted(toDoList, notes);
+                            task.markTaskAsCompleted(toDoList, notes);
                         break;
                     case "4":
-                        task.removeTaskAsCompleted(toDoList);
+                            task.removeTaskAsCompleted(toDoList, notes);
                         break;
                     case "5":
                         task.editTask(toDoList, notes);
@@ -104,11 +104,10 @@ public class TaskManager {
                         break;
                     default:
                         message.getInvalidOption();
+                        break;
                 }
-            } catch (Exception e) {
-                message.getDontHaveAnyTask();
-                menu();
-                    break;
+            } catch (CustomError e) {
+                System.out.println("Error: "+e.getMessage());
             }
 
         } while (programIsRunning);
